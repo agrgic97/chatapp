@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface UserInfoRepository extends MongoRepository<UserInfo, Integer> {
     Optional<UserInfo> findByName(String name);
 
-    boolean existsByName(String name);
+    boolean existsUserInfoByName(String name);
+
+    boolean existsUserInfoByEmail(String email);
 }

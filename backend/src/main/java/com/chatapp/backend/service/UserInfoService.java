@@ -35,7 +35,7 @@ public class UserInfoService implements UserDetailsService {
     }
 
     public String addUser(UserDTO userDTO) throws UserAlreadyExistsException {
-        if (repository.existsByName(userDTO.getName())) throw new UserAlreadyExistsException("User with name " + userDTO.getName() + " already exists.");
+        if (repository.existsUserInfoByName(userDTO.getName())) throw new UserAlreadyExistsException("User with name " + userDTO.getName() + " already exists.");
         UserInfo userInfo = UserInfo.builder()
                 ._id(UUID.randomUUID())
                 .name(userDTO.getName())
@@ -48,5 +48,11 @@ public class UserInfoService implements UserDetailsService {
         return "User Added Successfully";
     }
 
+    public boolean existsByUsername(String username) {
+        return repository.existsUserInfoByName(username);
+    }
 
+    public boolean existsByEmail(String email) {
+        return repository.existsUserInfoByEmail(email);
+    }
 }
