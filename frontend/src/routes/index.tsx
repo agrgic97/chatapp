@@ -5,7 +5,6 @@ import Login from "../pages/Login.tsx";
 import Main from "../pages/Main.tsx";
 import Register from "../pages/Register.tsx";
 import Welcome from "../pages/Welcome.tsx";
-import {UnprotectedRoute} from "./UnprotectedRoute.tsx";
 
 const Index = () => {
   const { token } = useAuth();
@@ -47,22 +46,16 @@ const Index = () => {
   // Define routes accessible only to non-authenticated users
   const routesForNotAuthenticatedOnly = [
     {
-      path: "/",
-      element: <UnprotectedRoute />,
-      children: [
-        {
-          path: "/login",
-          element: <Login/>,
-        },
-        {
-          path: "/register",
-          element: <Register/>,
-        },
-        {
-          path: "/welcome",
-          element: <Welcome/>,
-        }
-      ]
+      path: "/login",
+      element: <Login/>,
+    },
+    {
+      path: "/register",
+      element: <Register/>,
+    },
+    {
+      path: "/welcome",
+      element: <Welcome/>,
     }
   ];
 

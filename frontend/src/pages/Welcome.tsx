@@ -5,8 +5,9 @@ function Welcome() {
 
   return (
     <div>
-      <h1>Welcome!</h1>
-      <button className={"mt-6 mb-2"} onClick={() => navigate("/register", {replace: true})}>Register</button>
+      <img className="mx-auto w-auto" src="src/assets/messenger.svg" alt="icon"/>
+      <h1 className="my-10">Welcome to my Messenger!</h1>
+      <button className={"mb-2"} onClick={() => navigate("/register", {replace: true})}>Register</button>
       <br/>
       <button onClick={() => navigate("/login",{replace: true})}>Login</button>
       </div>
