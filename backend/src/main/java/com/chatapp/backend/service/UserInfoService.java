@@ -27,7 +27,7 @@ public class UserInfoService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<UserInfo> userDetail = repository.findByName(username);
+        Optional<UserInfo> userDetail = repository.findByUsername(username);
 
         // Converting userDetail to UserDetails
         return userDetail.map(UserInfoDetails::new)
@@ -35,13 +35,13 @@ public class UserInfoService implements UserDetailsService {
     }
 
     public String addUser(UserDTO userDTO) throws UserAlreadyExistsException {
-        if (repository.existsUserInfoByName(userDTO.getName())) throw new UserAlreadyExistsException("User with name " + userDTO.getName() + " already exists.");
+        if (repository.existsUserInfoByUsername(userDTO.getUsername())) throw new UserAlreadyExistsException("User with name " + userDTO.getUsername() + " already exists.");
         UserInfo userInfo = UserInfo.builder()
-                ._id(UUID.randomUUID())
-                .name(userDTO.getName())
+                ._id(UUID.randomUUID().toString())
+                .username(userDTO.getUsername())
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
-                .roles(userDTO.getRoles())
+                .roles("ROLE_USER")
                 .build();
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
@@ -49,7 +49,7 @@ public class UserInfoService implements UserDetailsService {
     }
 
     public boolean existsByUsername(String username) {
-        return repository.existsUserInfoByName(username);
+        return repository.existsUserInfoByUsername(username);
     }
 
     public boolean existsByEmail(String email) {
