@@ -1,9 +1,0 @@
-package com.chatapp.backend.exception;
-
-import javax.naming.AuthenticationException;
-
-public class UserAlreadyExistsException extends AuthenticationException {
-    public UserAlreadyExistsException(final String msg) {
-        super(msg);
-    }
-}
